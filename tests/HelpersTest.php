@@ -35,4 +35,20 @@ class HelpersTest extends TestCase
 
         $this->assertEquals($description_br, $translated);
     }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     **/
+    public function testRedirection()
+    {
+        $url = 'www.google.com';
+
+        Helper::redirect($url);
+
+        $this->assertContains(
+            "Location: {$url}",
+            xdebug_get_headers()
+        );
+    }
 }

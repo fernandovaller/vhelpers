@@ -66,4 +66,25 @@ class Helper
 
         return str_replace(array_keys($us), array_values($us), $description);
     }
+
+    /**
+     * Força o redirecionamento para uma URL e
+     * para o fluxo do programa
+     * @param string $url URL a ser redirecionada
+     */
+    public static function redirect($url)
+    {
+        if (!headers_sent()) {
+            header('Location: ' . $url);
+            return true;
+        }
+
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="' . $url . '";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
+        echo '</noscript>';
+        return true;
+    }
 }
