@@ -61,4 +61,25 @@ class HelpersTest extends TestCase
 
         $this->assertEquals($date_full, $description);
     }
+
+    public function testDateBr()
+    {
+        $date = '2021-03-14';
+        $date_br = '14/03/2021';
+
+        $date_in_br = Helper::dateBR($date);
+
+        $this->assertEquals($date_br, $date_in_br);
+    }
+
+    public function testDateTimeBr()
+    {
+        $date_time = '2021-03-14 14:47:21';
+
+        $date_time_br = '14/03/2021 14:47:21';
+
+        $ddate_time_in_br = Helper::dateTimeBR($date_time);
+
+        $this->assertEquals($date_time_br, $ddate_time_in_br);
+    }
 }

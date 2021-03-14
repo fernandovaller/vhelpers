@@ -36,6 +36,34 @@ class Helper
     }
 
     /**
+     * Converte uma data no padrão US para o padrão BR
+     * @param string $date Data no formato YYYY-MM-DDD
+     * @return string Data no formato DD-MM-YYYY
+     */
+    public static function dateBR($date)
+    {
+        if (empty($date)) {
+            return '';
+        }
+
+        return date("d/m/Y", strtotime($date));
+    }
+
+    /**
+     * Converte uma data com hora no padrão US para o padrão BR
+     * @param string $date Data no formato YYYY-MM-DDD 0:00:00
+     * @return string Data no formato DD-MM-YYYY 00:00:00
+     */
+    public static function dateTimeBR($date_time)
+    {
+        if (empty($date_time)) {
+            return '';
+        }
+
+        return date("d/m/Y G:i:s", strtotime($date_time));
+    }
+
+    /**
      * Traduz a descrição de Dias e Meses em US para BR
      * @param string $description Descrição de Dias ou Meses em ingles [Monday|November]
      * @return string Descrição traduzida [Segunda|Novembro]
