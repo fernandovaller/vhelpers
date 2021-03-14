@@ -74,7 +74,7 @@ class Helper
             return '';
         }
 
-        $date = \DateTime::createFromFormat('d/m/Y', $date);
+        $date = \DateTime::createFromFormat('d/m/Y', $date, new \DateTimeZone('America/Fortaleza'));
         return $date->format('Y-m-d');
     }
 
@@ -89,7 +89,7 @@ class Helper
             return '';
         }
 
-        $date = \DateTime::createFromFormat('d/m/Y G:i:s', $date_time);
+        $date = \DateTime::createFromFormat('d/m/Y G:i:s', $date_time, new \DateTimeZone('America/Fortaleza'));
         return $date->format('Y-m-d G:i:s');
     }
 

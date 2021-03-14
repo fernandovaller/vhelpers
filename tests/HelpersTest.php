@@ -93,7 +93,6 @@ class HelpersTest extends TestCase
         $this->assertEquals($date_us, $date_in_us);
     }
 
-
     public function testDateTimeUs()
     {
         $date_time = '4/3/2021 4:47:21';
