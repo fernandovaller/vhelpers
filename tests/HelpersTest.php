@@ -24,4 +24,15 @@ class HelpersTest extends TestCase
 
         $this->assertEquals($cnpj_whith_mask, $cnpj_formated);
     }
+
+    public function testDateTranslate()
+    {
+        $description_us = 'Monday, 14 March 2021';
+
+        $description_br = 'Segunda, 14 Março 2021';
+
+        $translated = Helper::dateTranslateUsToBr($description_us);
+
+        $this->assertEquals($description_br, $translated);
+    }
 }
