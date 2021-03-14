@@ -103,4 +103,24 @@ class HelpersTest extends TestCase
 
         $this->assertEquals($date_time_us, $date_time_in_us);
     }
+
+    public function testFormatarValorParaReal()
+    {
+        $valor = 1234.56;
+        $valor_br = '1.234,56';
+
+        $valor_in_br = Helper::moeda($valor);
+
+        $this->assertEquals($valor_br, $valor_in_br);
+    }
+
+    public function testFormatarValorParaDola()
+    {
+        $valor = '1.234,56';
+        $valor_us = 1234.56;
+
+        $valor_in_us = Helper::moedaUS($valor);
+
+        $this->assertEquals($valor_us, $valor_in_us);
+    }
 }

@@ -9,6 +9,7 @@ class Helper
      * Exemplo de mascaras:
      * [CPF => ###.###.###-##]
      * [CNPJ => ##.###.###/####-##]
+     *
      * @param string $value
      * @param string $mask Use # para caracteres com valores
      * @return string Valor formatado
@@ -37,6 +38,7 @@ class Helper
 
     /**
      * Converte uma data no padrão US para o padrão BR
+     *
      * @param string $date Data no formato YYYY-MM-DDD
      * @return string Data no formato DD-MM-YYYY
      */
@@ -51,6 +53,7 @@ class Helper
 
     /**
      * Converte uma data com hora no padrão US para o padrão BR
+     *
      * @param string $date_time Data no formato YYYY-MM-DDD 0:00:00
      * @return string Data no formato DD-MM-YYYY 00:00:00
      */
@@ -65,6 +68,7 @@ class Helper
 
     /**
      * Converte uma data no padrão BR para o padrão US
+     *
      * @param string $date Data no formato DD/MM/YYYY
      * @return string Data no formato YYYY-MM-DDD
      */
@@ -80,6 +84,7 @@ class Helper
 
     /**
      * Converte uma data com hora no padrão BR para o padrão US
+     *
      * @param string $date_time Data no formato D/M/YYYY 00:00:00
      * @return string Data no formato YYYY-MM-DD 00:00:00
      */
@@ -95,6 +100,7 @@ class Helper
 
     /**
      * Traduz a descrição de Dias e Meses em US para BR
+     *
      * @param string $description Descrição de Dias ou Meses em ingles [Monday|November]
      * @return string Descrição traduzida [Segunda|Novembro]
      */
@@ -127,6 +133,7 @@ class Helper
 
     /**
      * Retorna a data informado por extenso.
+     *
      * @param string $date Data no formato YYYY-MM-DD, se não informado pega a data atual
      * @return string Exemplo: quinta-feira, 06 de março de 2014
      */
@@ -136,8 +143,8 @@ class Helper
     }
 
     /**
-     * Força o redirecionamento para uma URL e
-     * para o fluxo do programa
+     * Força o redirecionamento para uma URL
+     *
      * @param string $url URL a ser redirecionada
      */
     public static function redirect($url)
@@ -154,5 +161,46 @@ class Helper
         echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
         echo '</noscript>';
         return true;
+    }
+
+    /**
+     * Formata um valor para o padrão brasileiro (R$ - Real)
+     * @param float $valor Valor no formato 123.45
+     * @param integer $decimal numero de casas decimais
+     * @param string $zero retorno vazio ou zero
+     */
+    public static function moeda($valor, $decimal = 2, $zero = '0')
+    {
+        if (empty($valor) && $zero != '0') {
+            return $zero;
+        }
+
+        if (empty($valor) || $valor == 0) {
+            $valor = 0;
+        }
+
+        return number_format($valor, $decimal, ',', '.');
+    }
+
+    /**
+     * Formata um valor para o padrão americano ($ - US Dola)
+     * @param float $valor Valor no formato 123.45
+     * @param integer $decimal numero de casas decimais
+     * @param string $zero retorno vazio ou zero
+     */
+    public static function moedaUS($valor, $decimal = 2, $zero = '0')
+    {
+        if (empty($valor) && $zero != '0') {
+            return $zero;
+        }
+
+        if (empty($valor) || $valor == 0) {
+            $valor = 0;
+        }
+
+        $valor = str_replace('.', '', $valor);
+        $valor = str_replace(',', '.', $valor);
+
+        return number_format($valor, $decimal, '.', '');
     }
 }
