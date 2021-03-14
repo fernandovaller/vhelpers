@@ -42,7 +42,7 @@ class Helper
      */
     public static function dateBR($date)
     {
-        if (empty($date)) {
+        if (empty($date) || $date == '0000-00-00') {
             return '';
         }
 
@@ -51,16 +51,46 @@ class Helper
 
     /**
      * Converte uma data com hora no padrão US para o padrão BR
-     * @param string $date Data no formato YYYY-MM-DDD 0:00:00
+     * @param string $date_time Data no formato YYYY-MM-DDD 0:00:00
      * @return string Data no formato DD-MM-YYYY 00:00:00
      */
     public static function dateTimeBR($date_time)
     {
-        if (empty($date_time)) {
+        if (empty($date_time) || $date_time == '0000-00-00 0:00:00') {
             return '';
         }
 
         return date("d/m/Y G:i:s", strtotime($date_time));
+    }
+
+    /**
+     * Converte uma data no padrão BR para o padrão US
+     * @param string $date Data no formato DD/MM/YYYY
+     * @return string Data no formato YYYY-MM-DDD
+     */
+    public static function dateUS($date)
+    {
+        if (empty($date) || strlen($date) < 8) {
+            return '';
+        }
+
+        $date = \DateTime::createFromFormat('d/m/Y', $date);
+        return $date->format('Y-m-d');
+    }
+
+    /**
+     * Converte uma data com hora no padrão BR para o padrão US
+     * @param string $date_time Data no formato D/M/YYYY 00:00:00
+     * @return string Data no formato YYYY-MM-DD 00:00:00
+     */
+    public static function dateTimeUS($date_time)
+    {
+        if (empty($date_time) || strlen($date_time) < 16) {
+            return '';
+        }
+
+        $date = \DateTime::createFromFormat('d/m/Y G:i:s', $date_time);
+        return $date->format('Y-m-d G:i:s');
     }
 
     /**

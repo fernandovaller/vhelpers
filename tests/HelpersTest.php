@@ -78,8 +78,30 @@ class HelpersTest extends TestCase
 
         $date_time_br = '14/03/2021 14:47:21';
 
-        $ddate_time_in_br = Helper::dateTimeBR($date_time);
+        $date_time_in_br = Helper::dateTimeBR($date_time);
 
-        $this->assertEquals($date_time_br, $ddate_time_in_br);
+        $this->assertEquals($date_time_br, $date_time_in_br);
+    }
+
+    public function testDateUs()
+    {
+        $date = '1/3/2021';
+        $date_us = '2021-03-01';
+
+        $date_in_us = Helper::dateUS($date);
+
+        $this->assertEquals($date_us, $date_in_us);
+    }
+
+
+    public function testDateTimeUs()
+    {
+        $date_time = '4/3/2021 4:47:21';
+
+        $date_time_us = '2021-03-04 4:47:21';
+
+        $date_time_in_us = Helper::dateTimeUS($date_time);
+
+        $this->assertEquals($date_time_us, $date_time_in_us);
     }
 }
