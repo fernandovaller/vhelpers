@@ -68,6 +68,16 @@ class Helper
     }
 
     /**
+     * Retorna a data informado por extenso.
+     * @param string $date Data no formato YYYY-MM-DD, se não informado pega a data atual
+     * @return string Exemplo: quinta-feira, 06 de março de 2014
+     */
+    public static function dateDescriptionFull($date = 'today')
+    {
+        return strftime('%A, %d de %B de %Y', strtotime($date));
+    }
+
+    /**
      * Força o redirecionamento para uma URL e
      * para o fluxo do programa
      * @param string $url URL a ser redirecionada

@@ -51,4 +51,14 @@ class HelpersTest extends TestCase
             xdebug_get_headers()
         );
     }
+
+    public function testDateDescriptionFull()
+    {
+        $date = '2014-03-06';
+        $date_full = 'Thursday, 06 de March de 2014';
+
+        $description = Helper::dateDescriptionFull($date);
+
+        $this->assertEquals($date_full, $description);
+    }
 }
