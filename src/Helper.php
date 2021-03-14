@@ -203,4 +203,41 @@ class Helper
 
         return number_format($valor, $decimal, '.', '');
     }
+
+    /**
+     * Exibir ou Registrar uma mensagem na sessão
+     * @param string $msg Mensagem a ser registrada
+     * @param string $tipo Tipo de mensagem [success, info, warning, danger]
+     * @param boolean $template Informar se a mensagem uso o template do bootstrap
+     * @return true|string
+     */
+    public static function flash($msg = '', $tipo = 'success', $template = true)
+    {
+        if (!empty($msg)) {
+            $_SESSION['flash'][] = $template ? self::alertTemplate($msg, $tipo) : $msg;
+            return true;
+        }
+
+        if (isset($_SESSION['flash']) && !empty($_SESSION['flash'])) {
+            $msg = implode("\n", $_SESSION['flash']);
+            unset($_SESSION['flash']);
+            return $msg;
+        }
+    }
+
+    /**
+     * Criar um alerta com um template do componente alert do bootstrap
+     * @param string $msg Mensagem a ser inserida no template
+     * @param string $tipo Tipo de mensagem [success, info, warning, danger]
+     * @param string $title Texto em destaque na mensagem
+     * @return string
+     */
+    public static function alertTemplate($msg, $tipo = 'success', $title = '')
+    {
+        $msg_title = !empty($title) ? "<strong>{$title}</strong>" : '';
+
+        $btn_close = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+
+        return '<div class="alert alert-' . $tipo . '">' . $btn_close . $msg_title . $msg . '</div>';
+    }
 }

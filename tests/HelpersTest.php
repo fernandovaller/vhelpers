@@ -123,4 +123,25 @@ class HelpersTest extends TestCase
 
         $this->assertEquals($valor_us, $valor_in_us);
     }
+
+    public function testRegistrarMensageFlash()
+    {
+        $msg = 'Teste de msg';
+
+        Helper::flash($msg, '', false);
+
+        $this->assertEquals($msg, $_SESSION['flash'][0]);
+    }
+
+    public function testRegistrarMensageFlashTemplate()
+    {
+        $msg = 'Teste de msg';
+
+        Helper::flash($msg, 'danger');
+
+        $this->assertEquals(
+            '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Teste de msg</div>',
+            $_SESSION['flash'][0]
+        );
+    }
 }
